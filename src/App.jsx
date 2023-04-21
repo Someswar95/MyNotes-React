@@ -1,44 +1,42 @@
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import * as React from "react";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import "./App.css";
-import { ThemeProvider, createTheme } from "@mui/material";
-import { purple } from "@mui/material/colors";
 import Error404 from "./pages/Error404";
-import Layout from "./components/Layout";
-import Notes from "./pages/Notes";
+import ThemeState from "./context/theme/ThemeState";
+import NoteState from "./context/note/NoteState";
+import Login from "./components/Login";
+import Register from "./pages/Register";
+import Home from "./pages/Home";
 import Create from "./pages/Create";
-import NoteState from "./context/NoteState";
+import PrivateRoutes from "./pages/PrivateRoutes";
+import AuthRoutes from "./pages/AuthRoutes";
+import { ThemeProvider } from "@mui/material";
+import { Theme } from "./hooks/Theming/Theme";
 
-const theme = createTheme({
-  palette: {
-    primary: {
-      main: "#fafafa",
-    },
-    secondary: purple,
-  },
-  typography: {
-    fontFamily: "Quicksand",
-    fontWeightLight: 400,
-    fontWeightRegular: 500,
-    fontWeightMedium: 600,
-    fontWeightBold: 700,
-  },
-});
+const App = () => {
+  const [theme] = Theme();
 
-function App() {
   return (
-    <NoteState>
-      <ThemeProvider theme={theme}>
-        <Router>
-          <Layout />
-          <Routes>
-            <Route exact path="/" element={<Notes />} />
-            <Route exact path="/create" element={<Create />} />
-            <Route exact path="*" element={<Error404 />} />
-          </Routes>
-        </Router>
-      </ThemeProvider>
-    </NoteState>
+    <ThemeProvider theme={theme}>
+      <ThemeState>
+        <NoteState>
+          <BrowserRouter>
+            <Routes>
+              <Route exact path="/" element={<Home />} />
+              <Route exact path="/" element={<AuthRoutes />}>
+                <Route path="login" element={<Login />} />
+                <Route path="register" element={<Register />} />
+              </Route>
+              <Route exact path="/" element={<PrivateRoutes />}>
+                <Route path="addNote" element={<Create />} />
+              </Route>
+              <Route exact path="*" element={<Error404 />} />
+            </Routes>
+          </BrowserRouter>
+        </NoteState>
+      </ThemeState>
+    </ThemeProvider>
   );
-}
+};
 
 export default App;

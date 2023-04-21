@@ -18,13 +18,13 @@ export const doLogout = (next) => {
 };
 
 // currentUser
-export const currentUserDetail = () => {
-  if (isLoggedIn()) {
-    return JSON.parse(localStorage.getItem("data")).user;
-  } else {
-    return undefined;
-  }
-};
+// export const currentUserDetail = () => {
+//   if (isLoggedIn()) {
+//     return JSON.parse(localStorage.getItem("data")).user;
+//   } else {
+//     return undefined;
+//   }
+// };
 
 // token
 export const getToken = () => {

@@ -1,10 +1,10 @@
-import React, { useState } from "react";
+import * as React from "react";
 import { registerUser } from "../services/UserService";
 import { doLogin } from "../authorization/auth";
 import { useNavigate } from "react-router-dom";
 
 const Register = () => {
-  const [user, setUser] = useState({
+  const [user, setUser] = React.useState({
     name: "",
     email: "",
     password: "",

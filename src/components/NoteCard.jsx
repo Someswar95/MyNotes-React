@@ -1,4 +1,4 @@
-import React from "react";
+import * as React from "react";
 import { DeleteOutlineOutlined } from "@mui/icons-material";
 import {
   Avatar,
@@ -8,52 +8,47 @@ import {
   IconButton,
   Typography,
 } from "@mui/material";
+import { makeStyles } from "@mui/styles";
+import { blue, yellow } from "@mui/material/colors";
 
-// const useStyles = makeStyles({
-//   avatar: {
-//     backgroundColor: (n) => {
-//       if (n.category === "work") {
-//         return yellow[700];
-//       }
-//       if (n.category === "money") {
-//         return green[500];
-//       }
-//       if (n.category === "todos") {
-//         return pink[500];
-//       }
-//       return blue[500];
-//     },
-//   },
-// });
+const useStyles = makeStyles({
+  avatar: {
+    backgroundColor: (note) => {
+      if (note.tag === "personal") {
+        return blue[500];
+      }
+      return yellow[700];
+    },
+  },
+});
 
 const NoteCard = (props) => {
-  // const classes = useStyles(n);
   const { note } = props;
+  const classes = useStyles(note);
   return (
-    <div>
-      <Card elevation={1}>
+    <>
+      <Card elevation={1} className={classes.test}>
         <CardHeader
-          sx={{ padding: "500px" }}
-          // avatar={
-          //   <Avatar className={classes.avatar}>
-          //     {n.category[0].toUpperCase()}
-          //   </Avatar>
-          // }
+          avatar={
+            <Avatar className={classes.avatar}>
+              {note.tag[0].toUpperCase()}
+            </Avatar>
+          }
           action={
-            <IconButton>
+            <IconButton onClick={() => console.log("kkk")}>
               <DeleteOutlineOutlined />
             </IconButton>
           }
           title={note.title}
           subheader={note.tag}
         />
-        <CardContent sx={{ padding: "500px" }}>
+        <CardContent>
           <Typography variant="body2" color="textSecondary">
             {note.description}
           </Typography>
         </CardContent>
       </Card>
-    </div>
+    </>
   );
 };
 

@@ -1,10 +1,10 @@
-import { useState } from "react";
+import * as React from "react";
 import NoteContext from "./noteContext";
-import { privateAxios } from "../services/Helper";
+import { privateAxios } from "../../services/Helper";
 
-const Notestate = (props) => {
+const NoteState = (props) => {
   const notesInitial = [];
-  const [notes, setNotes] = useState(notesInitial);
+  const [notes, setNotes] = React.useState(notesInitial);
 
   const getNotes = async () => {
     const response = await privateAxios.get("/notes/fetchallnotes", notes);
@@ -18,4 +18,4 @@ const Notestate = (props) => {
   );
 };
 
-export default Notestate;
+export default NoteState;

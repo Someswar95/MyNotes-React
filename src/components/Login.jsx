@@ -1,10 +1,11 @@
-import React, { useState } from "react";
+import * as React from "react";
 import { loginUser } from "../services/UserService";
-import { doLogin, isLoggedIn } from "../authorization/auth";
+import { doLogin } from "../authorization/auth";
 import { useNavigate } from "react-router-dom";
+import Base from "../components/Base";
 
 const Login = () => {
-  const [credentials, setCredentials] = useState({
+  const [credentials, setCredentials] = React.useState({
     email: "",
     password: "",
   });
@@ -39,9 +40,12 @@ const Login = () => {
 
   return (
     <>
+      <Base />
       <h1>Login Details</h1>
       <form onSubmit={handleLogin}>
-        <label htmlFor="email">Email</label>
+        <label htmlFor="email" style={{ margin: "50px 0 0 150px" }}>
+          Email
+        </label>
         <input
           type="email"
           name="email"
