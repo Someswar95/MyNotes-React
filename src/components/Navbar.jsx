@@ -10,12 +10,13 @@ import {
   useTheme,
   useMediaQuery,
   Switch,
+  Avatar,
 } from "@mui/material";
 import PropTypes from "prop-types";
 import { Link, useNavigate } from "react-router-dom";
+import NavbarDrawer from "./NavbarDrawer";
 import { doLogout, isLoggedIn } from "../authorization/auth";
-import DrawerNav from "./DrawerNav";
-import themeContext from "../context/theme/themeContext";
+import { navbarStyle } from "../hooks/Styling/useStyle";
 
 const ElevationScroll = (props) => {
   const { children, window } = props;
@@ -36,10 +37,9 @@ ElevationScroll.propTypes = {
 };
 
 const Navbar = (props) => {
-  const themeObject = React.useContext(themeContext);
-  const { isDarkMode, colorMode } = themeObject;
   const [login, setLogin] = React.useState();
   const navigate = useNavigate();
+  const classes = navbarStyle();
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
   React.useEffect(() => {
@@ -57,10 +57,6 @@ const Navbar = (props) => {
 
   const authItems = [
     {
-      text: "Home",
-      path: "/",
-    },
-    {
       text: "Login",
       path: "/login",
     },
@@ -72,10 +68,6 @@ const Navbar = (props) => {
 
   const menuItems = [
     {
-      text: "Home",
-      path: "/",
-    },
-    {
       text: "Add note",
       path: "/addNote",
     },
@@ -85,23 +77,24 @@ const Navbar = (props) => {
       <CssBaseline />
       <ElevationScroll {...props}>
         <Box sx={{ flexGrow: 1 }}>
-          <AppBar
-            sx={{
-              bgcolor: "white",
-            }}
-          >
+          <AppBar>
             <Toolbar>
+              <Avatar
+                className={classes.avatar}
+                alt="brand-icon"
+                src="/notebook_icon.png"
+                component={Link}
+                to="/"
+              />
               <Typography
+                className={classes.title}
+                color="primary.dark"
                 variant="h6"
-                component="div"
-                color="black"
-                sx={{ flexGrow: 1 }}
               >
-                <span style={{ color: "#d32f2f" }}>M</span>y N
-                <span style={{ color: "#d32f2f" }}>o</span>tes
+                My Notes
               </Typography>
               {isMobile ? (
-                <DrawerNav />
+                <NavbarDrawer />
               ) : (
                 <>
                   {!login && (
@@ -109,7 +102,7 @@ const Navbar = (props) => {
                       {authItems.map((item) => {
                         return (
                           <Button
-                            color="error"
+                            color="secondary"
                             key={item.text}
                             onClick={() => navigate(item.path)}
                           >
@@ -124,7 +117,7 @@ const Navbar = (props) => {
                       {menuItems.map((item) => {
                         return (
                           <Button
-                            color="error"
+                            color="secondary"
                             key={item.text}
                             onClick={() => navigate(item.path)}
                           >
@@ -133,17 +126,14 @@ const Navbar = (props) => {
                         );
                       })}
                       <Button
-                        color="error"
+                        color="secondary"
                         component={Link}
                         to="/"
                         onClick={logout}
                       >
                         Logout
                       </Button>
-                      {/* <Switch defaultChecked /> */}
-                      <Button color="error" onClick={colorMode.toggleColorMode}>
-                        Mode
-                      </Button>
+                      <Button color="secondary">Mode</Button>
                     </>
                   )}
                 </>

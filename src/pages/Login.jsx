@@ -2,9 +2,19 @@ import * as React from "react";
 import { loginUser } from "../services/UserService";
 import { doLogin } from "../authorization/auth";
 import { useNavigate } from "react-router-dom";
-import Base from "../components/Base";
+import { loginStyles } from "../hooks/Styling/useStyle";
+import {
+  Avatar,
+  Box,
+  Container,
+  Paper,
+  TextField,
+  Typography,
+} from "@mui/material";
 
 const Login = () => {
+  const classes = loginStyles();
+
   const [credentials, setCredentials] = React.useState({
     email: "",
     password: "",
@@ -40,8 +50,25 @@ const Login = () => {
 
   return (
     <>
-      <Base />
-      <h1>Login Details</h1>
+      <Container className={classes.root}>
+        <Avatar
+          alt="brand-icon"
+          src="/notebook_icon.png"
+          className={classes.avatar}
+        />
+        <Typography variant="h6" className={classes.subHeader}>
+          Sign in to NotesHub
+        </Typography>
+        <Box className={classes.layoutPaper}>
+          <Paper elevation={2}>
+            <Box className={classes.innerPaper}>
+              <TextField label="Username" variant="standard" />
+            </Box>
+          </Paper>
+        </Box>
+      </Container>
+
+      {/* <h1 >Login Details</h1>
       <form onSubmit={handleLogin}>
         <label htmlFor="email" style={{ margin: "50px 0 0 150px" }}>
           Email
@@ -60,7 +87,7 @@ const Login = () => {
           onChange={(e) => handleChange(e, "password")}
         />
         <button type="submit">Login</button>
-      </form>
+      </form> */}
     </>
   );
 };

@@ -2,7 +2,7 @@ import * as React from "react";
 import noteContext from "../context/note/noteContext";
 import NoteCard from "./NoteCard";
 import { Container, Grid } from "@mui/material";
-import { noteStyles } from "../hooks/Styling/Notes";
+import { noteStyles } from "../hooks/Styling/useStyle";
 
 const Notes = () => {
   const context = React.useContext(noteContext);

@@ -7,12 +7,12 @@ import {
 } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
 import * as React from "react";
-import { navStyles } from "../hooks/Styling/NavDrawer";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { doLogout, isLoggedIn } from "../authorization/auth";
+import { navDrawerStyles } from "../hooks/Styling/useStyle";
 
-const DrawerNav = () => {
-  const classes = navStyles();
+const NavbarDrawer = () => {
+  const classes = navDrawerStyles();
   const [openDrawer, setOpenDrawer] = React.useState(false);
   const navigate = useNavigate();
   const authItems = [
@@ -40,12 +40,15 @@ const DrawerNav = () => {
       path: "/addNote",
     },
   ];
+
   const logout = () => {
     doLogout(() => {
-      // setLogin(false);
-      navigate("/");
+      if (localStorage.getItem()) {
+        window.location.reload();
+      }
     });
   };
+
   return (
     <>
       <div className={classes.root}>
@@ -88,7 +91,12 @@ const DrawerNav = () => {
                   </ListItem>
                 );
               })}
-              <ListItem button onClick={(() => setOpenDrawer(false), logout)}>
+              <ListItem
+                button
+                onClick={(() => setOpenDrawer(false), logout)}
+                component={Link}
+                to="/"
+              >
                 <ListItemText primary="Logout" />
               </ListItem>
             </List>
@@ -102,4 +110,4 @@ const DrawerNav = () => {
   );
 };
 
-export default DrawerNav;
+export default NavbarDrawer;
