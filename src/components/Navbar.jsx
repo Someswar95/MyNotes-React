@@ -9,7 +9,6 @@ import {
   Button,
   useTheme,
   useMediaQuery,
-  Switch,
   Avatar,
 } from "@mui/material";
 import PropTypes from "prop-types";

@@ -11,8 +11,14 @@ const NoteState = (props) => {
     const note = await response.data;
     setNotes(note);
   };
+
+  const addNote = async (note) => {
+    const response = await privateAxios.post("/notes/addnote", note);
+    return response.data;
+  };
+
   return (
-    <NoteContext.Provider value={{ notes, getNotes }}>
+    <NoteContext.Provider value={{ notes, getNotes, addNote }}>
       {props.children}
     </NoteContext.Provider>
   );

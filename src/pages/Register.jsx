@@ -11,6 +11,8 @@ import {
   Grid,
   TextField,
   Typography,
+  useMediaQuery,
+  useTheme,
 } from "@mui/material";
 import { signOutStyles } from "../hooks/Styling/useStyle";
 
@@ -23,6 +25,9 @@ const Register = () => {
   });
 
   const navigate = useNavigate();
+
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down("md"));
 
   const classes = signOutStyles();
 
@@ -48,139 +53,252 @@ const Register = () => {
       });
   };
   return (
-    <>
+    <React.Fragment>
       <Base />
-      <Container className={classes.root}>
-        <Grid container spacing={2}>
-          <Grid item xs={6}>
-            <Box sx={{ marginTop: "100px" }}>
-              <Typography variant="body1" color="secondary">
-                SIGNUP
-              </Typography>
-              <Typography variant="h4" color="secondary.dark" fontWeight="800">
-                Create an account
-              </Typography>
-              <Typography variant="body1" color="secondary">
-                Fill out the form to get started.
-              </Typography>
-              <Box
-                component="form"
-                onSubmit={handleRegister}
-                sx={{ marginTop: "30px" }}
-              >
-                <Grid container spacing={2}>
-                  <Grid item xs={6}>
-                    <Typography variant="body2" color="secondary.main">
-                      Enter your name
-                    </Typography>
-                    <TextField
-                      fullWidth
-                      type="text"
-                      label="Name"
-                      id="name"
-                      name="name"
-                      value={user.name}
-                      onChange={(e) => handleChange(e, "name")}
-                      sx={{ marginTop: "10px" }}
-                    />
-                  </Grid>
-                  <Grid item xs={6}>
-                    <Typography variant="body2" color="secondary.main">
-                      Enter your mobile
-                    </Typography>
-                    <TextField
-                      fullWidth
-                      type="text"
-                      label="Mobile"
-                      id="ph_no"
-                      name="ph_no"
-                      value={user.ph_no}
-                      onChange={(e) => handleChange(e, "ph_no")}
-                      sx={{ marginTop: "10px" }}
-                    />
-                  </Grid>
-                </Grid>
-
-                <Typography
-                  variant="body2"
-                  color="secondary.main"
-                  sx={{ marginTop: "30px" }}
-                >
-                  Enter your email
+      {isMobile ? (
+        <Container sx={{ marginTop: "150px" }}>
+          <Typography variant="body1" color="secondary">
+            SIGNUP
+          </Typography>
+          <Typography variant="h5" color="secondary.dark" fontWeight="800">
+            Create an account
+          </Typography>
+          <Typography variant="body1" color="secondary">
+            Fill out the form to get started.
+          </Typography>
+          <Box
+            component="form"
+            onSubmit={handleRegister}
+            sx={{ marginTop: "30px" }}
+          >
+            <Grid container spacing={2}>
+              <Grid item xs={6}>
+                <Typography variant="body2" color="secondary.main">
+                  Enter your name
                 </Typography>
                 <TextField
                   fullWidth
                   type="text"
-                  label="Email"
-                  id="email"
-                  name="email"
-                  value={user.email}
-                  onChange={(e) => handleChange(e, "email")}
+                  label="Name"
+                  id="name"
+                  name="name"
+                  value={user.name}
+                  onChange={(e) => handleChange(e, "name")}
                   sx={{ marginTop: "10px" }}
                 />
-                <Box sx={{ marginTop: "30px" }}>
-                  <Grid container spacing={38}>
-                    <Grid item xs={6}>
-                      <Typography variant="body2" color="secondary.main">
-                        Enter your password
-                      </Typography>
-                    </Grid>
-                    <Grid item xs={6}>
-                      <Typography variant="caption" color="info.main">
-                        Forgot your password?
-                      </Typography>
-                    </Grid>
-                  </Grid>
-                </Box>
+              </Grid>
+              <Grid item xs={6}>
+                <Typography variant="body2" color="secondary.main">
+                  Enter your mobile
+                </Typography>
                 <TextField
                   fullWidth
-                  type="password"
-                  label="Password"
-                  id="password"
-                  name="password"
-                  value={user.password}
-                  onChange={(e) => handleChange(e, "password")}
+                  type="text"
+                  label="Mobile"
+                  id="ph_no"
+                  name="ph_no"
+                  value={user.ph_no}
+                  onChange={(e) => handleChange(e, "ph_no")}
                   sx={{ marginTop: "10px" }}
                 />
-                <Box sx={{ marginTop: "30px" }}>
-                  <Grid container spacing={20}>
-                    <Grid item xs={8}>
+              </Grid>
+            </Grid>
+
+            <Typography
+              variant="body2"
+              color="secondary.main"
+              sx={{ marginTop: "30px" }}
+            >
+              Enter your email
+            </Typography>
+            <TextField
+              fullWidth
+              type="text"
+              label="Email"
+              id="email"
+              name="email"
+              value={user.email}
+              onChange={(e) => handleChange(e, "email")}
+              sx={{ marginTop: "10px" }}
+            />
+
+            <Typography
+              variant="body2"
+              color="secondary.main"
+              sx={{ marginTop: "30px" }}
+            >
+              Enter your password
+            </Typography>
+            <TextField
+              fullWidth
+              type="password"
+              label="Password"
+              id="password"
+              name="password"
+              value={user.password}
+              onChange={(e) => handleChange(e, "password")}
+              sx={{ marginTop: "10px" }}
+            />
+            <Box sx={{ marginTop: "30px" }}>
+              <Grid container spacing={2}>
+                <Grid item xs={10}>
+                  <Typography variant="body2" color="secondary.main">
+                    Already have an account?{" "}
+                    <Typography
+                      display="inline"
+                      variant="body2"
+                      color="info.light"
+                      component={Link}
+                      to="/login"
+                    >
+                      Sign in here.
+                    </Typography>
+                  </Typography>
+                </Grid>
+                <Grid item xs={2}>
+                  <Box display="flex" justifyContent="flex-end">
+                    <Button variant="contained" type="submit">
+                      Sign
+                    </Button>
+                  </Box>
+                </Grid>
+              </Grid>
+            </Box>
+          </Box>
+        </Container>
+      ) : (
+        <Container sx={{ marginTop: "70px" }}>
+          <Grid container spacing={2}>
+            <Grid item xs={6}>
+              <Box sx={{ marginTop: "100px" }}>
+                <Typography variant="body1" color="secondary">
+                  SIGNUP
+                </Typography>
+                <Typography
+                  variant="h4"
+                  color="secondary.dark"
+                  fontWeight="800"
+                >
+                  Create an account
+                </Typography>
+                <Typography variant="body1" color="secondary">
+                  Fill out the form to get started.
+                </Typography>
+                <Box
+                  component="form"
+                  onSubmit={handleRegister}
+                  sx={{ marginTop: "30px" }}
+                >
+                  <Grid container spacing={2}>
+                    <Grid item xs={6}>
                       <Typography variant="body2" color="secondary.main">
-                        Already have an account?{" "}
-                        <Typography
-                          display="inline"
-                          variant="body2"
-                          color="info.light"
-                          component={Link}
-                          to="/login"
-                        >
-                          Sign in here.
-                        </Typography>
+                        Enter your name
                       </Typography>
+                      <TextField
+                        fullWidth
+                        type="text"
+                        label="Name"
+                        id="name"
+                        name="name"
+                        value={user.name}
+                        onChange={(e) => handleChange(e, "name")}
+                        sx={{ marginTop: "10px" }}
+                      />
                     </Grid>
-                    <Grid item xs={4}>
-                      <Button variant="contained" type="submit">
-                        Sign up
-                      </Button>
+                    <Grid item xs={6}>
+                      <Typography variant="body2" color="secondary.main">
+                        Enter your mobile
+                      </Typography>
+                      <TextField
+                        fullWidth
+                        type="text"
+                        label="Mobile"
+                        id="ph_no"
+                        name="ph_no"
+                        value={user.ph_no}
+                        onChange={(e) => handleChange(e, "ph_no")}
+                        sx={{ marginTop: "10px" }}
+                      />
                     </Grid>
                   </Grid>
+
+                  <Typography
+                    variant="body2"
+                    color="secondary.main"
+                    sx={{ marginTop: "30px" }}
+                  >
+                    Enter your email
+                  </Typography>
+                  <TextField
+                    fullWidth
+                    type="text"
+                    label="Email"
+                    id="email"
+                    name="email"
+                    value={user.email}
+                    onChange={(e) => handleChange(e, "email")}
+                    sx={{ marginTop: "10px" }}
+                  />
+
+                  <Typography
+                    variant="body2"
+                    color="secondary.main"
+                    sx={{ marginTop: "30px" }}
+                  >
+                    Enter your password
+                  </Typography>
+                  <TextField
+                    fullWidth
+                    type="password"
+                    label="Password"
+                    id="password"
+                    name="password"
+                    value={user.password}
+                    onChange={(e) => handleChange(e, "password")}
+                    sx={{ marginTop: "10px" }}
+                  />
+                  <Box sx={{ marginTop: "30px" }}>
+                    <Grid container spacing={20}>
+                      <Grid item xs={8}>
+                        <Typography variant="body2" color="secondary.main">
+                          Already have an account?{" "}
+                          <Typography
+                            display="inline"
+                            variant="body2"
+                            color="info.light"
+                            component={Link}
+                            to="/login"
+                          >
+                            Sign in here.
+                          </Typography>
+                        </Typography>
+                      </Grid>
+                      <Grid item xs={4}>
+                        <Box display="flex" justifyContent="flex-end">
+                          <Button variant="contained" type="submit">
+                            Sign up
+                          </Button>
+                        </Box>
+                      </Grid>
+                    </Grid>
+                  </Box>
                 </Box>
               </Box>
-            </Box>
+            </Grid>
+            <Grid item xs={6}>
+              <Box sx={{ marginTop: "150px", marginLeft: "70px" }}>
+                <Avatar
+                  alt="cover_login"
+                  src="./cover_2.svg"
+                  variant="square"
+                  sx={{ width: "95%", height: "95%" }}
+                />
+              </Box>
+            </Grid>
           </Grid>
-          <Grid item xs={6}>
-            <Box sx={{ marginTop: "150px", marginLeft: "70px" }}>
-              <Avatar
-                alt="cover_login"
-                src="./cover_2.svg"
-                variant="square"
-                sx={{ width: "95%", height: "95%" }}
-              />
-            </Box>
-          </Grid>
-        </Grid>
-      </Container>
-    </>
+        </Container>
+      )}
+    </React.Fragment>
   );
 };
 
