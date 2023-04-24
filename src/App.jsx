@@ -9,6 +9,7 @@ import Home from "./pages/Home";
 import Create from "./pages/Create";
 import PrivateRoutes from "./pages/PrivateRoutes";
 import AuthRoutes from "./pages/AuthRoutes";
+import ResetPassword from "./pages/ResetPassword";
 import { ThemeProvider } from "@mui/material";
 import { Theme } from "./hooks/Theming/Theme";
 
@@ -23,6 +24,7 @@ const App = () => {
             <Route exact path="/" element={<Home />} />
             <Route exact path="/" element={<AuthRoutes />}>
               <Route path="login" element={<Login />} />
+              <Route path="/resetPassword" element={<ResetPassword />} />
               <Route path="register" element={<Register />} />
             </Route>
             <Route exact path="/" element={<PrivateRoutes />}>

@@ -46,60 +46,26 @@ export const homeStyles = makeStyles({
 
 export const loginStyles = makeStyles({
   root: {
-    marginTop: "100px",
+    marginTop: "150px",
   },
-  avatar: {
-    marginLeft: "80vh",
-  },
-  subHeader: {
-    paddingLeft: "69vh",
-    paddingTop: "5vh",
-  },
-  layoutPaper: {
-    display: "flex",
-    flexWrap: "wrap",
-    "& > :not(style)": {
-      m: 1,
-      width: 300,
-      height: 250,
-      backgroundColor: grey[50],
-      borderColor: "red",
-      borderRadius: "5px",
-    },
-    marginTop: "3vh",
-    marginLeft: "61vh",
-  },
-  innerPaper: {
-    margin: "18px 0 0 15px",
-  },
-  textHeader: {
-    color: "#262626",
-  },
-  input: {
-    display: "block",
-    width: "92%",
-    height: "20px",
-    margin: "8px 0 0 0",
-    backgroundColor: "white",
-    borderRadius: "5px",
-    borderColor: "#e6e6e6",
-    "&:hover": {
-      borderColor: "red",
-    },
+});
+
+export const signOutStyles = makeStyles({
+  root: {
+    marginTop: "70px",
   },
 });
 
 export const errorPageStyles = makeStyles({
+  root: {
+    marginTop: "80px",
+  },
   grid_left: {
-    marginTop: "200px",
+    marginTop: "140px",
     marginLeft: "80px",
   },
   grid_right: {
-    marginTop: "70px",
     marginLeft: "80px",
-  },
-  md_1: {
-    marginTop: "20px",
   },
   avatar: {
     width: "100%!important",

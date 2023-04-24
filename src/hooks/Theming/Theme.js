@@ -25,12 +25,12 @@ export const Theme = () => {
         },
         typography: {
           button: { textTransform: "none", textDecoration: "none" },
-          h1: { fontWeight: 700 },
-          fontFamily: "sans-serif",
-          fontWeightLight: 800,
-          fontWeightRegular: 500,
-          fontWeightMedium: 600,
-          fontWeightBold: 700,
+          body2: { textTransform: "none", textDecoration: "none" },
+          // h1: { fontWeight: 700 },
+          // fontWeightLight: 800,
+          // fontWeightRegular: 500,
+          // fontWeightMedium: 600,
+          // fontWeightBold: 700,
         },
       }),
     []

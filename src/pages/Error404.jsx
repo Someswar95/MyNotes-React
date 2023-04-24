@@ -13,7 +13,7 @@ import { Link } from "react-router-dom";
 const Error404 = () => {
   const classes = errorPageStyles();
   return (
-    <Container>
+    <Container className={classes.root}>
       <Grid container spacing={2}>
         <Grid item xs={6}>
           <Box className={classes.grid_left}>
