@@ -17,8 +17,32 @@ const NoteState = (props) => {
     return response.data;
   };
 
+  const editNote = async (id, note) => {
+    const response = await privateAxios.put(`/notes/updatenote/${id}`, note);
+    let newNotes = JSON.parse(JSON.stringify(notes));
+
+    for (let index = 0; index < newNotes.length; index++) {
+      const element = newNotes[index];
+      if (element._id === id) {
+        newNotes[index].title = title;
+        newNotes[index].description = description;
+        newNotes[index].tag = tag;
+        break;
+      }
+    }
+    setNotes(newNotes);
+  };
+
+  const deleteNote = async (id) => {
+    const response = await privateAxios.delete(`/notes/deletenote/${id}`);
+    const newNotes = notes.filter((note) => {
+      return note._id !== id;
+    });
+    setNotes(newNotes);
+  };
+
   return (
-    <NoteContext.Provider value={{ notes, getNotes, addNote }}>
+    <NoteContext.Provider value={{ notes, getNotes, addNote, deleteNote }}>
       {props.children}
     </NoteContext.Provider>
   );

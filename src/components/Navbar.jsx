@@ -132,7 +132,6 @@ const Navbar = (props) => {
                       >
                         Logout
                       </Button>
-                      <Button color="secondary">Mode</Button>
                     </>
                   )}
                 </>

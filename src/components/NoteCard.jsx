@@ -1,5 +1,5 @@
 import * as React from "react";
-import { DeleteOutlineOutlined } from "@mui/icons-material";
+import { DeleteOutlineOutlined, UpdateOutlined } from "@mui/icons-material";
 import {
   Avatar,
   Card,
@@ -12,6 +12,7 @@ import {
 } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 import { blue, yellow } from "@mui/material/colors";
+import noteContext from "../context/note/noteContext";
 
 const useStyles = makeStyles({
   avatar: {
@@ -26,17 +27,27 @@ const useStyles = makeStyles({
 
 const NoteCard = (props) => {
   const { note } = props;
+
+  const context = React.useContext(noteContext);
+  const { deleteNote } = context;
+
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
 
   const classes = useStyles(note);
+
   return (
     <>
       {isMobile ? (
-        <Card elevation={1} className={classes.test}>
+        <Card elevation={1}>
           <CardHeader
             action={
-              <IconButton onClick={() => console.log("kkk")}>
+              <IconButton
+                onClick={() => {
+                  deleteNote(note._id);
+                }}
+              >
+                <UpdateOutlined />
                 <DeleteOutlineOutlined />
               </IconButton>
             }
@@ -50,7 +61,7 @@ const NoteCard = (props) => {
           </CardContent>
         </Card>
       ) : (
-        <Card elevation={1} className={classes.test}>
+        <Card elevation={1}>
           <CardHeader
             avatar={
               <Avatar className={classes.avatar}>
@@ -58,7 +69,11 @@ const NoteCard = (props) => {
               </Avatar>
             }
             action={
-              <IconButton onClick={() => console.log("kkk")}>
+              <IconButton
+                onClick={() => {
+                  deleteNote(note._id);
+                }}
+              >
                 <DeleteOutlineOutlined />
               </IconButton>
             }
